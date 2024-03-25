@@ -1,0 +1,14 @@
+Metadata-Version: 2.1
+Name: graph_utils
+Version: 0.1
+Summary: Necessary utility functions for performing graph reduction experiment.
+Author: Zahiriddin Rustamov
+Author-email: zahir@uaeu.ac.ae
+Requires-Dist: networkx==2.7
+Requires-Dist: pandas
+Requires-Dist: numpy
+Requires-Dist: scikit-learn
+Requires-Dist: optuna
+Requires-Dist: tqdm
+Requires-Dist: igraph
+Requires-Dist: xgboost
