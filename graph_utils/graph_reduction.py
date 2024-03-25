@@ -66,7 +66,7 @@ def preprocess(dataset, scaler=MinMaxScaler()):
 
     return X_train, X_val, X_test, y_train, y_val, y_test
 
-def test_classification_models(X_train, y_train, X_val, y_val, X_test, y_test, reduction_percentage, original_training_instances, similarity_method, simple=False):
+def test_classification_models(X_train, y_train, X_val, y_val, X_test, y_test, reduction_percentage, original_training_instances, similarity_method, RANDOM_STATE=1, simple=False):
     if simple:
         models = {
             'RF': RandomForestClassifier(random_state=RANDOM_STATE, n_jobs=1),
