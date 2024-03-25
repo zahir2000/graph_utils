@@ -20,6 +20,21 @@ import time
 
 RANDOM_STATE = 1
 
+def standardize_class_labels(y, y_train, y_val, y_test):
+    """
+    This function should ensure the class labels start from 0 and are consecutive integers.
+    """
+    # Creating a mapping from original classes to 0-based consecutive integers
+    unique_classes = sorted(y.unique())
+    class_mapping = {original: new for new, original in enumerate(unique_classes)}
+    
+    # Applying the mapping to target variables
+    y_train = y_train.map(class_mapping)
+    y_val = y_val.map(class_mapping)
+    y_test = y_test.map(class_mapping)
+
+    return y_train, y_val, y_test
+
 def preprocess(dataset, scaler=MinMaxScaler()):
     # Renaming target columns to 'class' if exists
     if "Class" in dataset.columns:
@@ -55,15 +70,7 @@ def preprocess(dataset, scaler=MinMaxScaler()):
     X_val = pd.DataFrame(X_val)
     X_test = pd.DataFrame(X_test)
 
-    # Creating a mapping from original classes to 0-based consecutive integers
-    unique_classes = sorted(y.unique())
-    class_mapping = {original: new for new, original in enumerate(unique_classes)}
-    
-    # Applying the mapping to target variables
-    y_train = y_train.map(class_mapping)
-    y_val = y_val.map(class_mapping)
-    y_test = y_test.map(class_mapping)
-
+    y_train, y_val, y_test = standardize_class_labels(y, y_train, y_val, y_test)
     return X_train, X_val, X_test, y_train, y_val, y_test
 
 def test_classification_models(X_train, y_train, X_val, y_val, X_test, y_test, reduction_percentage, original_training_instances, similarity_method, RANDOM_STATE=1, simple=False):
